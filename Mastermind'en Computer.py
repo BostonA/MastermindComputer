@@ -29,5 +29,16 @@ def Choose_1_random_color():
 def FirstTurn():
     #What To Print on first turn
     print "I will Play:", Choose_1_random_color(), Choose_1_random_color(),Choose_1_random_color(),Choose_1_random_color()
+def GetPegInputFromUser():
+    #Red and White are the color of the small pegs
+    Red = raw_input("How many red Pegs: ")
+    White = raw_input("How many White Pegs: ")
+    return Red, White
 #BODY BELOW
 FirstTurn()
+Pegs = GetPegInputFromUser()
+RedPegs = Pegs[0]
+WhitePegs = Pegs[1]
+print "Red Pegs", RedPegs
+print "White Pegs", WhitePegs
+
