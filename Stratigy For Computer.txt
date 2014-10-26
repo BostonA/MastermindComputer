@@ -1,3 +1,5 @@
 10-26-2014
 
-Random On the first turn
+Random On the first turn WRITTEN
+
+If computer gets red peg try a random one of the four colors in the first turn
