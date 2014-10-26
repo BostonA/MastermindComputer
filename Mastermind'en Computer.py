@@ -25,5 +25,9 @@ def Choose_1_random_color():
     
     
 
+
+def FirstTurn():
+    #What To Print on first turn
+    print "I will Play:", Choose_1_random_color(), Choose_1_random_color(),Choose_1_random_color(),Choose_1_random_color()
 #BODY BELOW
-print Choose_1_random_color()
+FirstTurn()
