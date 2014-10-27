@@ -31,7 +31,8 @@ def InteractionAtBeganing(TitleText):
     easygui.msgbox(msg = "There is no way you can guess it", title = TitleText +  " Intoduction", ok_button = "Next")
 
     easygui.msgbox(msg = "But I will give you a try", title = TitleText +  " Intoduction", ok_button = "Next")
-    easygui.enterbox(msg = "Enter Your nic-name (what you want to be called by in the game)", title = TitleText)
+    Name = easygui.enterbox(msg = "Enter Your nic-name (what you want to be called by in the game)", title = TitleText)
+    easygui.enterbox(msg = "Enter your email address", title = Name + " " + TitleText + " Email Address.")
 
 def UserPlay():
     easygui.buttonbox(msg = "Pick the color for the color of your leftmost hole", title = "Play Mastermind (By Boston Abrams)Copyright 2014 Boston Abrams", choices = ("Blue", "Green", "White", "Red", "Yellow", "Orange"))
