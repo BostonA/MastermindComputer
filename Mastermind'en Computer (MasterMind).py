@@ -34,27 +34,64 @@ def InteractionAtBeganing(TitleText):
 
 def UserPlay(TitleText):
     #Propts the user enter their guess
-    ColorChosen = []
+    ColorChosen = ["","","",""]
     easygui.msgbox(msg = "Enter Your Guesses in the boxes that follow ", title = TitleText +  " Guessing", ok_button = "Next")
     ColorChosen[0] = easygui.buttonbox(msg = "Pick the color for your 1st hole", title = TitleText + " Guessing", choices = ("Blue", "Green", "White", "Red", "Yellow", "Orange"))
     ColorChosen[1] = easygui.buttonbox(msg = "Pick the color for your 2nd hole", title = TitleText + " Guessing", choices = ("Blue", "Green", "White", "Red", "Yellow", "Orange"))
-    ColorChosen[3] = easygui.buttonbox(msg = "Pick the color for your 3nd hole", title = TitleText + " Guessing", choices = ("Blue", "Green", "White", "Red", "Yellow", "Orange"))
-    ColorChosen[4] = easygui.buttonbox(msg = "Pick the color for your 4nd hole", title = TitleText + " Guessing", choices = ("Blue", "Green", "White", "Red", "Yellow", "Orange"))
+    ColorChosen[2] = easygui.buttonbox(msg = "Pick the color for your 3nd hole", title = TitleText + " Guessing", choices = ("Blue", "Green", "White", "Red", "Yellow", "Orange"))
+    ColorChosen[3] = easygui.buttonbox(msg = "Pick the color for your 4nd hole", title = TitleText + " Guessing", choices = ("Blue", "Green", "White", "Red", "Yellow", "Orange"))
     return ColorChosen
+
 def HowManyPegs(ColorsOfUsersGuess, MasterCode):
-    Counter = 0 # counts number of ColorsOfUsersGuess's to match the Master Code
+    MasterCodeCounter = 0
+    ColorsOfUsersGuessCounter = 0
     #Figures out how many pegs
     Red = 0 #How many reds
     White = 0 #how many Whites
-    while counter > 5:
-        if ColorsOfUsersGuess[0] == MasterCode[counter]:
-            pass
+    KeepGoing = True
+    while MasterCodeCounter < 4:
+        KeepGoing = True
+        MasterCodeCounter = MasterCodeCounter + 1
+        ColorsOfUsersGuessCounter = 0 #Reset
+        while ColorsOfUsersGuessCounter < 4 and KeepGoing: #Fix Number of Whites
+            ColorsOfUsersGuessCounter = ColorsOfUsersGuessCounter + 1
+            if ColorsOfUsersGuess[ColorsOfUsersGuessCounter - 1] == MasterCode[MasterCodeCounter - 1]:
+                if MasterCodeCounter == ColorsOfUsersGuessCounter:
+
+                    Red = Red + 1
+                    KeepGoing = False
+                else:
+                    White = White + 1
+    print Red
+    print White
+    if Red == 4:
+        return ["Won", "Won"]
+    else:
+        return [Red, White]
+    
+def TellUserScore (RedNo, WhiteNo, Title):
+    return easygui.buttonbox(msg = "You Got " + str(RedNo) + " Red Pegs \n You Got " + str(WhiteNo) + " White Pegs", title = Title + "Peg Number.", choices = ("Next", "Quit", "Forfit", "New Game", "Send Feedback (or a bug)"))
 def MakeUserStatFile(PlayerEmail, PlayerName, WhoWon):
     things = open(PlayerName + " Mastermind Stat doc.txt", "a")
     things.write("During Game 1 " + WhoWon + " Won")
     things.close()
-
-Code = [Choose_1_random_color(), Choose_1_random_color(),Choose_1_random_color(),Choose_1_random_color()]
-InteractionAtBeganing(TitleText)
-Colors = UserPlay()
-HowManyRedPegs(Colors, Code)
+def FiguresOutWhatTheUserWhatsToDo(WhatUserWantsToDo, TitleText):
+    Go = False
+    if WhatUserWantsToDo == "Next":
+        Go = True
+    elif WhatUserWantsToDo == "Send Feedback (or a bug)":
+        Feedback(TitleText)
+def Feedback(TitleText):
+    Error = easygui.enterbox(msg = "What is your feedback?", title = TitleText + " FeedBack")
+    things = open("FeedBack (Mastermind).txt", "a")
+    things.write(Error + "\n")
+    things.close()
+#Code = ["Green", "Green","Green","Green"]
+#print Code
+#Colors = UserPlay(TitleText)
+#REDWHITE = HowManyPegs(Colors, Code)
+#RedPegs = REDWHITE[0]
+#WhitePegs = REDWHITE[1]
+#WhatUserWantsToDo = TellUserScore(RedPegs, WhitePegs, TitleText)
+#FiguresOutWhatTheUserWhatsToDo(WhatUserWantsToDo)
+FiguresOutWhatTheUserWhatsToDo("Send Feedback (or a bug)", TitleText)
